@@ -220,7 +220,7 @@ init()
 icon = image.load('data/icon.png')
 display.set_icon(icon)
 screen = display.set_mode((640,480))
-display.set_caption('Frogger')
+display.set_caption('Froggix')
 
 #Create font for text on screen
 scorefont = font.Font(None, 40)
