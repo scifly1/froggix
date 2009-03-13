@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 from pygame import *
 import random
 import os
+import platform
 import cPickle
 import operator
 
@@ -230,6 +231,9 @@ def updateHighscores(name,  level_score):
 #Game begins here.
 
 #Set up pygame window.
+if platform.system() == "Windows":
+    os.environ['SDL_VIDEODRIVER'] = 'windib' 
+
 mixer.pre_init(44100,-16,2, 1024)
 init()
 icon = image.load('data/icon.png')
