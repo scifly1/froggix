@@ -1,0 +1,12 @@
+Froggix 0.2
+- Replaced Klonk.ogg (music) with a lower bitrate version to reduce the file size.
+- Improved README
+
+Froggix 0.1
+- Renamed Froggix for hosting on sourceforge. 
+- COPYING file added and GPL header added to source file.
+- README improved and authors contact details included.
+- BugFix: fixed detection of video driver on Windows. 
+
+Frogger 0.0.  February 2009
+-  Initially made to enter into a Linux Format magazine coding competition, where it won the author a keyboard and was mentioned in the magazine and distributed on the DVD.
