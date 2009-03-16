@@ -15,11 +15,17 @@ Time bonus 		up to 1000 points
 
 
 Running the game:
-This game is written in python and uses the pygame modules.  These are available for linux (search your package manager), windows and Mac (download from python.org/download and http://www.pygame.org/download.shtml).
+This game is written in python and uses the pygame modules.  These are available for linux (search your package manager), Windows and Mac (download from python.org/download and http://www.pygame.org/download.shtml).
+
+I had a report that setting pygame up on a Mac could be difficult (Thanks John Kirby).  The blog at :
+http://geoffford.wordpress.com/2009/01/20/pygame-on-os-x-leopard/
+was helpful to him, so I hope it can be of use to others.
  
 In Linux: type 'python froggix.py' at a command line, from the directory containing this file.
 
-In Windows (and Mac?? (sorry not tested on a Mac!  If anyone tries, please let me know how you get on!)) just click on the froggix.py file.
+In Windows just click on the froggix.py file.
+
+In Mac OS X, either run from the command line as with Linux, or drag the froggix.py file to PythonLauncher from the Finder or select PythonLancher as the default application to open the froggix.py file through the Info window and double-click it.
 
 This game is playable but is still being improved/fixed, so, if you find any bugs or have any suggestions for improvements or any patches, please contact me by email at the address at the top of this file or through the forum or bug tracker on the game's sourceforge pages http://sourceforge.net/projects/froggix/ .
 
