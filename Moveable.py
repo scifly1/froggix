@@ -56,14 +56,15 @@ class TimedMoveable(Moveable):
         if delay:
             self.delay = delay * 1000  #delay is in seconds, while self.delay needs to be msecs
             self.timer = time.get_ticks()
+    
         self.locations = locs
     def move(self,  level):
         #determine if a change in location is needed (level is not used at present)
         if (self.timer + self.delay) < time.get_ticks():
-         new_loc = random.choice(self.locations)
-         self.x = new_loc[0]
-         self.y = new_loc[1] 
-         self.timer = time.get_ticks()
+            new_loc = random.choice(self.locations)
+            self.x = new_loc.x
+            self.y = new_loc.y 
+            self.timer = time.get_ticks()
         
         #TODO add ability of crocs and flies to be on other moveables.
 

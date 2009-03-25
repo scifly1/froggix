@@ -17,10 +17,8 @@ This file is part of Froggix.
     along with Froggix.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
-from pygame import *
-from Locations import Locations
 
-class Home(Locations):
+class Locations:
     '''
     classdocs
     '''
@@ -28,5 +26,8 @@ class Home(Locations):
         '''
         Constructor
         '''
-        Locations.__init__(self,x_pos,y_pos)
+        self.x,  self.y = x_pos, y_pos
+        self.width,  self.height = 45,  45
+
+
         

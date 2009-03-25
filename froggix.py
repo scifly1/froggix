@@ -28,6 +28,7 @@ import operator
 
 from Moveable import *
 from Home import Home
+from Locations import Locations
 
 
 #Global constants
@@ -36,11 +37,12 @@ game_time_bonus = 1000 #maximum points available as time bonus points
 fly_points = 100
 home_points = 250
 move_points = 10
-fly_locations = ((210, 15), (360, 15), (510, 15), (50, 15), (70, 215), (220, 215), (380, 215), (530, 215), (200, 415), (440, 415))
-croc_locations = ((50, 0), (200, 0), (350, 0), (500, 0))
 highscorefile = "data/highscores.dat"
 letter_list = ['_','A', 'B', 'C', 'D',  'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', \
               'U', 'V', 'W', 'X', 'Y', 'Z' ]
+
+#Global Variables
+fly_locations = []
     
 #Global Function definitions are defined here. 
 
@@ -108,11 +110,21 @@ def initGame(no_of_lives = 4 ,  score = 0):
     river_objects.extend(turtles)
     river_objects.extend(logs2)
     
+    bank_locations = [Locations(x,y) for (x,y) in [(210, 15), (360, 15), 
+                                                   (510, 15), (50, 15), (70, 215), 
+                                                   (220, 215), (380, 215), (530, 215), 
+                                                   (200, 415), (440, 415)]]
     homes = [Home(x, 0) for x in [50, 200, 350, 500]]
+    
+    global fly_locations
+    fly_locations.extend(bank_locations)
+    
+    croc_locations = homes
+    croc_locations.append(Locations(-50,-50)) # Add an offscreen location
     
     flies = [TimedMoveable(x, 15, 'data/fly.png', None, None,  1.5, fly_locations)\
               for x in [210, 360, 510]]
-    crocs = [TimedMoveable(50, 0, 'data/croc.png', None, None,  3, croc_locations)]
+    crocs = [TimedMoveable(50, 0, 'data/croc.png', None, None,  3, homes)]
 
     game_data = {'frog':frog,'frogs':frogs, 'vehicles':vehicles, 'river_objects':river_objects,\
                   'homes':homes, 'flies':flies, 'crocs':crocs,  'score':score }
@@ -396,7 +408,8 @@ while quit == 0:
              lives -= 1
              game_data['frog'] = nextFrog(game_data,  lives,  init_lives,  False,  True)
              
-        home_occupied = [(index, value) for (index, value) in enumerate(home) if  value != None]
+        home_occupied = [(index, value) for (index, value) in enumerate(home) 
+                         if  value != None]
         if game_data['frog'] and game_data['frog'].y < 50 and not home_occupied:  # frog on the bank but not in a home
              lives -= 1
              game_data['frog'] = nextFrog(game_data,  lives,  init_lives,  True,  False)
