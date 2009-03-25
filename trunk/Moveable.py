@@ -72,15 +72,18 @@ class RiverMoveable(TimedMoveable):
     classdocs
     '''
     
-    def __init__(self, x_pos, y_pos, filename, alt_filename, speed, delay = None, locs = None):
+    def __init__(self, x_pos, y_pos, filename, alt_filename, speed, 
+                 delay = None, locs = None):
         '''
         Constructor
         '''
-        TimedMoveable.__init__(self, x_pos, y_pos, filename, alt_filename, speed, delay, locs)
+        TimedMoveable.__init__(self, x_pos, y_pos, filename, alt_filename, 
+                               speed, delay, locs)
         if delay:
             self.sinkable = True
         else:
-            self.sinkable = False
+            self.sinkable = False     # sinkable determines if object can sink
+                                      # ie: is it a log or turtle.
         self.temp_bitmap = None
         self.timer = None
         self.sinking = False
