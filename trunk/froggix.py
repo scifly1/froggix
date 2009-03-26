@@ -29,6 +29,7 @@ import operator
 from Moveable import *
 from Home import Home
 from Locations import Locations
+from Animation import Animation
 
 
 #Global constants
@@ -58,9 +59,11 @@ def nextFrog(game_data, lives,  init_lives,  drowned = False, crushed = False):
          if crushed:
             game_data['frog'].bitmap = game_data['frog'].alt_bitmap
          if drowned:
-             drowned_frog = [(index, value) for (index, value) in enumerate(game_data['frogs'])\
-                                                                                       if  value == game_data['frog']]
+             drowned_frog = [(index, value) for (index, value) in 
+                             enumerate(game_data['frogs']) 
+                             if  value == game_data['frog']]
              game_data['frogs'][drowned_frog[0][0]].draw = False
+             game_data['anims'][0].run(game_data['frog'].x,game_data['frog'].y)
         
          frog = game_data['frogs'][init_lives-lives]  
          frog.x, frog.y = 305,405
@@ -125,9 +128,12 @@ def initGame(no_of_lives = 4 ,  score = 0):
     flies = [TimedMoveable(x, 15, 'data/fly.png', None, None,  1.5, fly_locations)\
               for x in [210, 360, 510]]
     crocs = [TimedMoveable(50, 0, 'data/croc.png', None, None,  3, homes)]
+    
+    splash = ['data/splash1.png','data/splash2.png','data/splash3.png']
+    animations = [Animation(splash,150)]
 
     game_data = {'frog':frog,'frogs':frogs, 'vehicles':vehicles, 'river_objects':river_objects,\
-                  'homes':homes, 'flies':flies, 'crocs':crocs,  'score':score }
+                  'homes':homes, 'flies':flies, 'crocs':crocs,  'score':score ,'anims':animations }
     return game_data
     
 def loadHighscores(): #returns a list of unpickled highscores or an empty list if no scores
@@ -427,6 +433,8 @@ while quit == 0:
             in_between_level = True
             in_game = False
             
+        #Update and draw animations Needs to be done first so splash is drawn first
+        [anim.update(screen) for anim in game_data['anims']]
         
         #Draw all objects.  The order is important. frogs need to be on top of all but vehicles
         to_draw = [ 'river_objects', 'flies', 'crocs', 'frogs',  'vehicles']
