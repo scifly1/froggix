@@ -1,6 +1,8 @@
 Froggix 0.2
+- Added use of simple animations to create a splash when falling in the river.
 - Replaced Klonk.ogg (music) with a lower bitrate version to reduce the file size.
-- Improved README
+- Improved README.
+- Various other bug fixes.
 
 Froggix 0.1
 - Renamed Froggix for hosting on sourceforge. 

@@ -17,7 +17,6 @@ This file is part of Froggix.
     along with Froggix.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
-from pygame import *
 from Locations import Locations
 
 class Home(Locations):
