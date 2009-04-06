@@ -54,16 +54,15 @@ def intersect(frogger, mover):
     else:
         return None
 
-def nextFrog(game_data, lives,  init_lives,  drowned = False, crushed = False):
-    if lives > 0:
-         if crushed:
+def nextFrog(game_data, lives,  init_lives,  demise = None):
+    if lives > 0:        
+         if demise == 'crushed':
             game_data['frog'].bitmap = game_data['frog'].alt_bitmap
-         if drowned:
-             drowned_frog = [(index, value) for (index, value) in 
-                             enumerate(game_data['frogs']) 
-                             if  value == game_data['frog']]
-             game_data['frogs'][drowned_frog[0][0]].draw = False
+         elif demise == 'drowned':
+             game_data['frog'].draw = False
              game_data['anims'][0].run(game_data['frog'].x,game_data['frog'].y)
+         elif demise == 'lost':
+             game_data['frog'].draw = False
         
          frog = game_data['frogs'][init_lives-lives]  
          frog.x, frog.y = 305,405
@@ -403,22 +402,22 @@ while quit == 0:
         if (50 < game_data['frog'].y < 200) and game_data['frog'].speed == 0: 
              mixer.Sound.play(splasheffect)
              lives -= 1
-             game_data['frog'] = nextFrog(game_data,  lives,  init_lives,  True,  False)
+             game_data['frog'] = nextFrog(game_data,  lives,  init_lives, 'drowned')
          
         if  [h for h in hit if h != None] :    # if a vehicle is hit.
              mixer.Sound.play(crasheffect)
              lives -= 1
-             game_data['frog'] = nextFrog(game_data,  lives,  init_lives,  False,  True)
+             game_data['frog'] = nextFrog(game_data,  lives,  init_lives, 'crushed')
         if [cl for cl in croc_lunch if cl != None]:  #if a croc is hit
              mixer.Sound.play(cruncheffect)
              lives -= 1
-             game_data['frog'] = nextFrog(game_data,  lives,  init_lives,  False,  True)
+             game_data['frog'] = nextFrog(game_data,  lives,  init_lives,  'crushed')
              
         home_occupied = [(index, value) for (index, value) in enumerate(home) 
                          if  value != None]
         if game_data['frog'] and game_data['frog'].y < 50 and not home_occupied:  # frog on the bank but not in a home
              lives -= 1
-             game_data['frog'] = nextFrog(game_data,  lives,  init_lives,  True,  False)
+             game_data['frog'] = nextFrog(game_data,  lives,  init_lives,  'lost')
             
         elif game_data['frog'] and game_data['frog'].y < 50 and home_occupied:  #  Frog safe at home, so next frog in play.
             mixer.Sound.play(cheereffect)
