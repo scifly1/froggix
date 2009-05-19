@@ -26,24 +26,19 @@ import platform
 import cPickle
 import operator
 
+'''
 from Moveable import *
 from Home import Home
 from Locations import Locations
 from Animation import Animation
-
+'''
 
 #Global constants
-game_length = 60000.0  # 60 seconds
-game_time_bonus = 1000 #maximum points available as time bonus points
-fly_points = 100
-home_points = 250
-move_points = 10
-highscorefile = "data/highscores.dat"
-letter_list = ['_','A', 'B', 'C', 'D',  'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', \
+
+HIGHSCOREFILE = "data/highscores.dat"
+LETTER_LIST = ['_','A', 'B', 'C', 'D',  'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', \
               'U', 'V', 'W', 'X', 'Y', 'Z' ]
 
-#Global Variables
-fly_locations = []
     
 #Global Function definitions are defined here. 
 
@@ -72,7 +67,7 @@ def nextFrog(game_data, lives,  init_lives,  demise = None):
     
 def updateCountdown(start_time,  level_counter):
     time_now = time.get_ticks()
-    game_left = (time_now - start_time) / (game_length - (level_counter * 10000))
+    game_left = (time_now - start_time) / (GAME_LENGTH - (level_counter * 10000))
     return game_left
     
 def drawCountdown(game_left):
@@ -86,7 +81,7 @@ def drawCountdown(game_left):
     
     rect = Rect(x,452, width,16)  
     screen.fill((220, 0, 0), rect)
-    
+'''    
 def initGame(no_of_lives = 4 ,  score = 0):
     #Create frogs and other objects, package them in lists and return a dictionary of the lists.
     frog_x_positions = [x*50 for x in range(no_of_lives) ]
@@ -134,10 +129,10 @@ def initGame(no_of_lives = 4 ,  score = 0):
     game_data = {'frog':frog,'frogs':frogs, 'vehicles':vehicles, 'river_objects':river_objects,\
                   'homes':homes, 'flies':flies, 'crocs':crocs,  'score':score ,'anims':animations }
     return game_data
-    
+'''    
 def loadHighscores(): #returns a list of unpickled highscores or an empty list if no scores
-    if os.path.exists(highscorefile):
-        hsfile = open(highscorefile,  'r')
+    if os.path.exists(HIGHSCOREFILE):
+        hsfile = open(HIGHSCOREFILE,  'r')
         highscores = cPickle.load(hsfile)
         hsfile.close()
         return highscores
@@ -152,10 +147,10 @@ def saveHighscores(highscores):
 def updateName(name, letter_list_index, Enter=False):
     split_name = list(name)
     if Enter:
-        split_name.insert(-1, letter_list[letter_list_index])
+        split_name.insert(-1, LETTER_LIST[letter_list_index])
     else:
         split_name.pop()
-        split_name.append(letter_list[letter_list_index])
+        split_name.append(LETTER_LIST[letter_list_index])
     name = ''.join(split_name)
     return name
    
