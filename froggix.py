@@ -19,13 +19,15 @@ This file is part of Froggix.
 """
 
 
-from pygame import *
+#from pygame import *
 import random
-import os
-import platform
+#import os
+#import platform
 import cPickle
 import operator
 
+from PygameDrv import PygameDrv
+from Game import Game
 '''
 from Moveable import *
 from Home import Home
@@ -168,6 +170,10 @@ def updateHighscores(name,  level_score):
 
 #Game begins here.
 
+GameWindow = PygameDrv()  #Set up window and pygame stuff like music and sfx
+Game = Game()  # Start a new game
+
+'''
 #Set up pygame window.
 if platform.system() == "Windows":
     os.environ['SDL_VIDEODRIVER'] = 'windib' 
@@ -201,17 +207,18 @@ mixer.music.play(-1)
 
 game_data = initGame()
 score = game_data['score']
+'''
 
 #Set some constant text surfaces up
-titletext = titlefont.render("Frogger!", True, (246, 230, 40))
-playtext = menufont.render("Press 1 to Play",  True,  (246, 230,40))
-quittext = menufont.render("Press Esc to Quit",  True, (246, 230, 40))
-quittext1 = scorefont.render("Press Escape to quit or", True, (255, 0, 0))
-quittext2 = scorefont.render("press Spacebar to try again", True, (255, 0, 0))
-highscoretext = menufont.render("Highscores:",  True,  (255, 0, 0))
-highscoretext1 = scorefont.render("a new Highscore!",  True, (255, 0, 0))
-highscoretext2 = scorefont.render("Use the Up and Down keys to choose letters,",  True, (255, 0, 0))
-highscoretext3 = scorefont.render("Enter to select and Backspace to delete.",  True, (255, 0, 0))
+titletext = GameWindow.titlefont.render("Frogger!", True, (246, 230, 40))
+playtext = GameWindow.menufont.render("Press 1 to Play",  True,  (246, 230,40))
+quittext = GameWindow.menufont.render("Press Esc to Quit",  True, (246, 230, 40))
+quittext1 = GameWindow.scorefont.render("Press Escape to quit or", True, (255, 0, 0))
+quittext2 = GameWindow.scorefont.render("press Spacebar to try again", True, (255, 0, 0))
+highscoretext = GameWindow.menufont.render("Highscores:",  True,  (255, 0, 0))
+highscoretext1 = GameWindow.scorefont.render("a new Highscore!",  True, (255, 0, 0))
+highscoretext2 = GameWindow.scorefont.render("Use the Up and Down keys to choose letters,",  True, (255, 0, 0))
+highscoretext3 = GameWindow.scorefont.render("Enter to select and Backspace to delete.",  True, (255, 0, 0))
 
 
 in_game = False  # a flag set when in play

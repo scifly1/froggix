@@ -35,7 +35,7 @@ class Game():
         self.HOME_POINTS = 250
         self.MOVE_POINTS = 10
         
-        #Create frogs and other objects, package them in lists and return a dictionary of the lists.
+        #Create frogs and other objects and package them in lists
         frog_x_positions = [x*50 for x in range(no_of_lives) ]
         self.frogs = [Moveable(x,430,'data/frog.png', 'data/splat.png', 0) for x in frog_x_positions ]
         self.frog = self.frogs[0]  
@@ -65,6 +65,7 @@ class Game():
                                                        (200, 415), (440, 415)]]
         self.homes = [Home(x, 0) for x in [50, 200, 350, 500]]
         
+        self.fly_locations = []
         self.fly_locations.extend(bank_locations)
         
         self.croc_locations = self.homes
@@ -77,8 +78,11 @@ class Game():
         splash = ['data/splash1.png','data/splash2.png','data/splash3.png']
         self.animations = [Animation(splash,150)]
     
+        self.score = score
+        self.no_of_lives = no_of_lives
         '''game_data = {'frog':frog,'frogs':frogs, 'vehicles':vehicles, 'river_objects':river_objects,\
                       'homes':homes, 'flies':flies, 'crocs':crocs,  'score':score ,'anims':animations }
         return game_data
     '''
+
     
